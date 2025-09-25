@@ -2,7 +2,7 @@
 // Implémenter ici les 4 classes du modèle.
 // N'oubliez pas l'héritage !
 function Drawing() {
-    this.shapes = []
+    this.shapes =  new Map()
 
 }
 
@@ -20,7 +20,7 @@ function Rectangle(originX, originY, width, height, thickness, color) {
     this.width = width
     this.height = height
 
-    Shape.call(originX,originY,thickness, color)
+    Shape.call(this,originX,originY,thickness, color)
 
     
     
@@ -32,6 +32,6 @@ function Line(originX, originY, finalX, finalY, thickness, color) {
     this.finalX =  finalX
     this.finalY = finalY
 
-    Shape.call(originX,originY,thickness, color)
+    Shape.call(this,originX,originY,thickness, color)
     
 }

@@ -34,12 +34,12 @@ function Pencil(ctx, drawing, canvas) {
 
 	this.onInteractionUpdate = function(dnd){
 		console.log("Interaction updated");
-		if(this.currentShape == editingMode.line){
+		if(this.currEditingMode == editingMode.line){
 			this.currentShape = new Line(dnd.initialX, dnd.initialY, dnd.finalX, dnd.finalY, this.currLineWidth, this.currColour);
 			this.currentShape.paint(ctx);
 			drawing.paint(ctx,canvas);
 		}
-		else if(this.currentShape == editingMode.rect){ 
+		else if(this.currEditingMode == editingMode.rect){ 
 			this.currentShape = new Rectangle(dnd.initialX, dnd.initialY, dnd.finalX - dnd.initialX, dnd.finalY - dnd.initialY, this.currLineWidth, this.currColour);
 			this.currentShape.paint(ctx);
 
@@ -54,12 +54,12 @@ function Pencil(ctx, drawing, canvas) {
 
 	this.onInteractionEnd = function(dnd){
 		console.log("Interaction ended");
-		if(this.currentShape == editingMode.line){
+		if(this.currEditingMode == editingMode.line){
 			let line = new Line(this.initialX, this.initialY, this.currLineWidth, this.currColour);
 			drawing.shapes.push(line);
 			drawing.paint(ctx,canvas);
 		}
-		else if(this.currentShape == editingMode.rect){
+		else if(this.currEditingMode == editingMode.rect){
 			let rect = new Rectangle(this.initialX, this.initialY, this.finalX - this.initialX, this.finalY - this.initialY, this.currLineWidth, this.currColour);
 			drawing.shapes.push(rect);
 		
