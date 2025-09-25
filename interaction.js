@@ -4,51 +4,57 @@
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 function DnD(canvas, interactor) {
 	// les coordonnées de la position initiale du DnD ;
-  this.initialX = 0
-  this.initialY = 0 
+  this.initialX = 0;
+  this.initialY = 0 ;
 
 	// les coordonnées de la position finale du DnD ;
-  this.finalX = 0
-  this.finalY = 0
+  this.finalX = 0;
+  this.finalY = 0;
 
-  this.isPressed = false
+  this.isPressed = false;
+  this.interactor = interactor;
 
 	// Developper les 3 fonctions gérant les événements
   this.handlePress =function(evt) {
     if (!this.isPressed){
-      this.initialX = evt.x
-      this.initialY = evt.y
+      var pos = getMousePosition(canvas, evt);
+      this.initialX = pos.x
+      this.initialY = pos.y
       console.log("initX", this.initialX)
       console.log("initY",this.initialY)
       console.log("fX",this.finalX)
       console.log("fY", this.finalY)
       
     }
-    interactor.onInteractionStart(this);
+    this.interactor.onInteractionStart(this);
     this.isPressed = true
 
   }.bind(this);
 
   this.handleMove=function(evt){
     if (this.isPressed){
-      this.finalX = evt.x
-      this.finalY = evt.y
+      var pos = getMousePosition(canvas, evt);
+      this.finalX = pos.x
+      this.finalY = pos.y
       console.log("initX", this.initialX)
       console.log("initY",this.initialY)
       console.log("fX",this.finalX)
       console.log("fY", this.finalY)
+      this.interactor.onInteractionUpdate(this);
     }
-    interactor.onInteractionUpdate(this);
 
   }.bind(this);
 
   this.handleUnpress=function(evt){
+    var pos = getMousePosition(canvas, evt);
     this.isPressed = false
+    this.finalX = pos.x
+    this.finalY = pos.y
     console.log("initX", this.initialX)
     console.log("initY",this.initialY)
     console.log("fX",this.finalX)
     console.log("fY", this.finalY)
-    interactor.onInteractionEnd(this);
+    this.interactor.onInteractionEnd(this);
   }.bind(this);
   
 	// Associer les fonctions précédentes aux évènements du canvas.

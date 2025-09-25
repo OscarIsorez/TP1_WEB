@@ -6,7 +6,9 @@ function Drawing() {
 
 }
 
-function Shape(thickness, color ){
+function Shape(initialX,initialY,thickness, color ){
+    this.initialX = initialX
+    this.initialY = initialY
     this.thickness = thickness
     this.color = color
     
@@ -15,12 +17,10 @@ function Shape(thickness, color ){
 }
 
 function Rectangle(originX, originY, width, height, thickness, color) {
-    this.originX = originX
-    this.originY = originY
     this.width = width
     this.height = height
 
-    Shape.call(thickness, color)
+    Shape.call(originX,originY,thickness, color)
 
     
     
@@ -28,10 +28,10 @@ function Rectangle(originX, originY, width, height, thickness, color) {
 }
 
 
-function Line(originX, originY, thickness, color) {
-    this.originX = originX
-    this.originY = originY
+function Line(originX, originY, finalX, finalY, thickness, color) {
+    this.finalX =  finalX
+    this.finalY = finalY
 
-    Shape.call(thickness, color)
+    Shape.call(originX,originY,thickness, color)
     
 }
